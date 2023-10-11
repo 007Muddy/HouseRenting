@@ -20,12 +20,52 @@ namespace HouseRenting.Controllers
         }
 
         // GET: Houses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+     string sortOrder,
+     string currentFilter,
+     string searchString,
+     int? pageNumber)
         {
-              return _context.House != null ? 
-                          View(await _context.House.ToListAsync()) :
-                          Problem("Entity set 'HouseDbContext.House'  is null.");
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["TypeSortParm"] = sortOrder == "Type" ? "Type_desc" : "Type";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "Price_desc" : "Price"; // Corrected ViewData key
+            ViewData["CurrentFilter"] = searchString;
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            var houses = from s in _context.House
+                         select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                houses = houses.Where(s => s.Type.Contains(searchString) || s.Price.ToString().Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "Type_desc":
+                    houses = houses.OrderByDescending(s => s.Type);
+                    break;
+                case "Price_desc":
+                    houses = houses.OrderByDescending(s => s.Price);
+                    break;
+                case "Price":
+                    houses = houses.OrderBy(s => s.Price);
+                    break;
+                case "Type":
+                    houses = houses.OrderBy(s => s.Type);
+                    break;
+                default:
+                    houses = houses.OrderBy(s => s.Type);
+                    break;
+            }
+            int pageSize = 4;
+            return View(await PaginatedList<House>.CreateAsync(houses.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
+
 
         // GET: Houses/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -150,14 +190,14 @@ namespace HouseRenting.Controllers
             {
                 _context.House.Remove(house);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool HouseExists(int id)
         {
-          return (_context.House?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.House?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

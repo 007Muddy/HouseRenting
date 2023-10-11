@@ -4,12 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using HouseRenting.Data;
 using HouseRenting.Models;
 using System;
+using HouseRenting.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'HouseRentingContextConnection' not found.");
 
 builder.Services.AddDbContext<HouseDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<HouseRentingUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<HouseDbContext>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,6 +37,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
