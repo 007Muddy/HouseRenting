@@ -26,7 +26,7 @@ public static class SeedData
                     Color = "Gray",
                     Area = 950.5m,
                     Price = 135000,
-                    NumberOfRooms = "2",
+                    Rooms = "2",
                     Location = "789 Maple Ave",
                     ConstructionDate = new DateTime(2011, 9, 30),
                     Description = "Modern apartment with great city access."
@@ -37,7 +37,7 @@ public static class SeedData
                     Color = "Blue",
                     Area = 2000.5m,
                     Price = 250000,
-                    NumberOfRooms = "3",
+                    Rooms = "3",
                     Location = "123 Main St",
                     ConstructionDate = new DateTime(2005, 5, 15),
                     Description = "A beautiful single-family home in a quiet neighborhood."
@@ -48,7 +48,7 @@ public static class SeedData
                     Color = "Red",
                     Area = 1200.75m,
                     Price = 150000,
-                    NumberOfRooms = "2",
+                    Rooms = "2",
                     Location = "456 Elm St",
                     ConstructionDate = new DateTime(2010, 8, 20),
                     Description = "Spacious apartment with a great view of the city."
@@ -59,7 +59,7 @@ public static class SeedData
                     Color = "White",
                     Area = 1000.0m,
                     Price = 180000,
-                    NumberOfRooms = "2",
+                    Rooms = "2",
                     Location = "789 Oak St",
                     ConstructionDate = new DateTime(2008, 12, 10),
                     Description = "Modern condo with excellent amenities."
@@ -70,7 +70,7 @@ public static class SeedData
                     Color = "Yellow",
                     Area = 1500.25m,
                     Price = 210000,
-                    NumberOfRooms = "4",
+                    Rooms = "4",
                     Location = "101 Pine St",
                     ConstructionDate = new DateTime(2012, 6, 5),
                     Description = "Charming townhouse with a small garden."
@@ -81,7 +81,7 @@ public static class SeedData
                      Color = "Teal",
                      Area = 1600.0m,
                      Price = 245000,
-                     NumberOfRooms = "4",
+                     Rooms = "4",
                      Location = "456 Maple Ln",
                      ConstructionDate = new DateTime(2016, 11, 20),
                      Description = "Duplex with two spacious units for rental income."
@@ -92,7 +92,7 @@ public static class SeedData
                     Color = "Green",
                     Area = 1800.0m,
                     Price = 280000,
-                    NumberOfRooms = "4",
+                    Rooms = "4",
                     Location = "222 Oak Ave",
                     ConstructionDate = new DateTime(2015, 4, 18),
                     Description = "Duplex with two separate units for rental income."
@@ -103,7 +103,7 @@ public static class SeedData
                       Color = "Gold",
                       Area = 1100.5m,
                       Price = 170000,
-                      NumberOfRooms = "2",
+                      Rooms = "2",
                       Location = "456 Elm St",
                       ConstructionDate = new DateTime(2019, 11, 20),
                       Description = "Modern condo with excellent amenities."
@@ -114,7 +114,7 @@ public static class SeedData
                      Color = "Gold",
                      Area = 1100.5m,
                      Price = 170000,
-                     NumberOfRooms = "2",
+                     Rooms = "2",
                      Location = "456 Elm St",
                      ConstructionDate = new DateTime(2019, 11, 20),
                      Description = "Modern condo with excellent amenities."
@@ -125,7 +125,7 @@ public static class SeedData
                       Color = "Magenta",
                       Area = 1500.0m,
                       Price = 220000,
-                      NumberOfRooms = "4",
+                      Rooms = "4",
                       Location = "789 Pine Ave",
                       ConstructionDate = new DateTime(2018, 4, 5),
                       Description = "Charming townhouse with a beautiful garden."
@@ -137,7 +137,7 @@ public static class SeedData
                     Color = "Brown",
                     Area = 2200.75m,
                     Price = 320000,
-                    NumberOfRooms = "3",
+                    Rooms = "3",
                     Location = "333 Meadow Ln",
                     ConstructionDate = new DateTime(2009, 10, 25),
                     Description = "Spacious ranch-style home with a large backyard."

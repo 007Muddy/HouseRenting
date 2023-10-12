@@ -13,13 +13,12 @@ namespace HouseRenting.Models
        
         public string Color { get; set; }
        
-        [Display(Name = "Area (M^2)")]
+       
         public decimal Area { get; set; }
         
-        [Display (Name = "Price (DKK)")]
         public decimal  Price { get; set; }
         
-        public string NumberOfRooms { get; set; }
+        public string Rooms { get; set; }
       
         public string Location { get; set; }
         
@@ -27,7 +26,9 @@ namespace HouseRenting.Models
      
         public string Description { get; set; }
 
+        public IFormFile? Image { get; set; }
         
+
 
     }
 }

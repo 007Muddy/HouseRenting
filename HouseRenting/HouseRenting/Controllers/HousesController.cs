@@ -96,7 +96,7 @@ namespace HouseRenting.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Type,Color,Area,Price,NumberOfRooms,Location,ConstructionDate,Description")] House house)
+        public async Task<IActionResult> Create([Bind("ID,Type,Color,Area,Price,Rooms,Location,ConstructionDate,Description")] House house)
         {
             if (ModelState.IsValid)
             {
@@ -128,7 +128,7 @@ namespace HouseRenting.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Type,Color,Area,Price,NumberOfRooms,Location,ConstructionDate,Description")] House house)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Type,Color,Area,Price,Rooms,Location,ConstructionDate,Description")] House house)
         {
             if (id != house.ID)
             {

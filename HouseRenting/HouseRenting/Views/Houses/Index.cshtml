@@ -28,14 +28,14 @@
                 Color
             </th>
             <th>
-                Area
+                Area M2
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Price</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Price DKK</a>
 
             </th>
             <th>
-               NumberOfRooms
+               Rooms
             </th>
             <th>
                Location
@@ -65,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumberOfRooms)
+                @Html.DisplayFor(modelItem => item.Rooms)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
@@ -76,6 +76,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
