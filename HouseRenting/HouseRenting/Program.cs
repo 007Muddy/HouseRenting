@@ -5,6 +5,8 @@ using HouseRenting.Data;
 using HouseRenting.Models;
 using System;
 using HouseRenting.Areas.Identity.Data;
+using Microsoft.AspNetCore.Http.Features;
+using System.Drawing;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'HouseRentingContextConnection' not found.");
@@ -15,7 +17,10 @@ builder.Services.AddDbContext<HouseDbContext>(options =>
 builder.Services.AddDefaultIdentity<HouseRentingUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<HouseDbContext>();
 
-
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = long.MaxValue;
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -38,7 +43,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
+app.UseRouting();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

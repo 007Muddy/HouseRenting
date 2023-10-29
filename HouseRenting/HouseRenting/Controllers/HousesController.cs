@@ -5,22 +5,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using HouseRenting.ViewModels;
 using HouseRenting.Data;
 using HouseRenting.Models;
 
+
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using Microsoft.AspNetCore.Authorization;
 namespace HouseRenting.Controllers
 {
     public class HousesController : Controller
     {
         private readonly HouseDbContext _context;
+        private readonly IWebHostEnvironment hosting;
 
-        public HousesController(HouseDbContext context)
+        public HousesController(HouseDbContext context, IWebHostEnvironment hosting)
         {
             _context = context;
+            this.hosting = hosting;
         }
 
-        // GET: Houses
-        public async Task<IActionResult> Index(
+        
+    
+
+    // GET: Houses
+    public async Task<IActionResult> Index(
      string sortOrder,
      string currentFilter,
      string searchString,
@@ -91,21 +100,53 @@ namespace HouseRenting.Controllers
             return View();
         }
 
+
+        private async Task<string> UploadFileAsync(IFormFile file, string targetFolder)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                return null;
+            }
+
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            string targetPath = Path.Combine(targetFolder, fileName);
+
+            using (var stream = new FileStream(targetPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return fileName;
+        }
         // POST: Houses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Type,Color,Area,Price,Rooms,Location,ConstructionDate,Description")] House house)
+        public async Task<IActionResult> Create([Bind("ID,Type,Color,Area,Price,Rooms,Location,ConstructionDate,Description, ImagePath")] House house, HouseViewModel viewModels)
         {
             if (ModelState.IsValid)
             {
+                // Call UploadFileAsync method to handle file upload
+                string imagesFolderPath = Path.Combine(hosting.WebRootPath, "Images");
+                string fileName = await UploadFileAsync(viewModels.File, imagesFolderPath);
+
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    house.ImagePath = fileName;
+                }
+
                 _context.Add(house);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // If ModelState is not valid, return the same view with the BoardsView object
             return View(house);
         }
+       
+
+
 
         // GET: Houses/Edit/5
         public async Task<IActionResult> Edit(int? id)

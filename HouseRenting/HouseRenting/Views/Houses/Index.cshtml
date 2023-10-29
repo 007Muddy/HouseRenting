@@ -46,6 +46,10 @@
             <th>
                Description
             </th>
+            <th>
+                Image
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -77,8 +81,13 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @if (item.ImagePath != null)
+                    {
+                        <img src="~/Images/@item.ImagePath" style="width:90px;" class="img-thumbnail" />
+                    }
+
                 </td>
+              
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |

@@ -18,7 +18,7 @@ public static class SeedData
                 return; // Database has been seeded
             }
 
-            // Add more seed data
+            //        // Add more seed data
             context.House.AddRange(
                 new House
                 {
@@ -142,10 +142,11 @@ public static class SeedData
                     ConstructionDate = new DateTime(2009, 10, 25),
                     Description = "Spacious ranch-style home with a large backyard."
                 }
-                // Add more data as needed
+            // Add more data as needed
             );
 
             context.SaveChanges();
+
         }
     }
 }
